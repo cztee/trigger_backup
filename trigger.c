@@ -25,7 +25,7 @@
 
 //Buffer depth 
 const int BUF = 16*1024;
-const int N = 80; 			// desired length of trace (1,..., 16383)
+const int N = 70; 			// desired length of trace (1,..., 16383)
 const int decimation = 1; 	// decimation: [1;8;64;1024;8192;65536]
 
 int main(int argc, char *argv[]) 
@@ -91,11 +91,11 @@ int main(int argc, char *argv[])
 	{	
 
 		// calculate how many microsecond elapsed per event 
-		uint64_t diff;
-		struct timespec start, end;
+		//uint64_t diff;
+		//struct timespec start, end;
 
 		/* measure monotonic time */
-		clock_gettime(CLOCK_MONOTONIC, &start);	/* mark start time */
+		//clock_gettime(CLOCK_MONOTONIC, &start);	/* mark start time */
 		/*Set trigger, begin acquisition when condition is met*/
 		osc_fpga_arm_trigger(); //start acquiring, incrementing write pointer
 		osc_fpga_set_trigger(0x3); // where do you want your triggering from?
@@ -143,14 +143,14 @@ int main(int argc, char *argv[])
         		fprintf(fp, "%d ", cha_signal[ptr]);
         	}
             }
-	    clock_gettime(CLOCK_MONOTONIC, &end);
-	    fprintf(fp, " ");
+	    //clock_gettime(CLOCK_MONOTONIC, &end);
+	    //fprintf(fp, " ");
 	    //char str[ENOUGH];
 	    //sprintf(str, "%ld", time(NULL)-start_time);
 	    //printf("Almost!\n");
-	    fprintf(fp,"%d ", -9999); // this separates the data from timestamp
-	    diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
-	    fprintf(fp,"%llu ",(long long unsigned int) diff);
+	    //fprintf(fp,"%d ", -9999); // this separates the data from timestamp
+	    //diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+	    //fprintf(fp,"%llu ",(long long unsigned int) diff);
 	    fprintf(fp, "\n");
 	   //printf("Checkpoint 2\n"); 
 	   if(endwait <time(NULL)){break;}
